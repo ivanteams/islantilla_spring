@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.soltel.islantilla.models.ClientesModel;
 import com.soltel.islantilla.repositories.IClientesRepository;
 
+@Service
 public class ClientesService {
     private final IClientesRepository clientesRepository;
 
