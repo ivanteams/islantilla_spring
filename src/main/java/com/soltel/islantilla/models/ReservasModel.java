@@ -3,15 +3,18 @@ package com.soltel.islantilla.models;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 //import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 import java.util.Date;
 
+// Tenemos que definir cual será la clave principal en otra clase
+// OJO! Solo para claves compuestas
 @Entity
 @Table(name = "reservas")
-
+@IdClass(ReservasId.class)
 public class ReservasModel {
 
     @Id
@@ -22,7 +25,7 @@ public class ReservasModel {
 
     @ManyToOne
     @JoinColumn(name = "nif", nullable = false)
-    private ClientesModel nif;
+    private ClientesModel cliente;
 
     @Column
     private float precio;
@@ -30,11 +33,11 @@ public class ReservasModel {
     // Constructores
     public ReservasModel() {	}
     
-	public ReservasModel(int hab, Date entrada, ClientesModel nif, float precio) {
+	public ReservasModel(int hab, Date entrada, ClientesModel cliente, float precio) {
 		super();
 		this.hab = hab;
 		this.entrada = entrada;
-		this.nif = nif;
+		this.cliente = cliente;
 		this.precio = precio;
 	}
 	
@@ -55,13 +58,7 @@ public class ReservasModel {
 		this.entrada = entrada;
 	}
 
-	public ClientesModel getNif() {
-		return nif;
-	}
 
-	public void setNif(ClientesModel nif) {
-		this.nif = nif;
-	}
 
 	public float getPrecio() {
 		return precio;

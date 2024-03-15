@@ -7,6 +7,13 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.Set;
 
+
+/**
+ * IMPORTANTE: Para las entidades el orden es:
+ * 1) ClientesModel (la tabla principal)
+ * 2) ReservasId (por la clave compuesta)
+ * 3) ReservasModel (la tabla secundaria)
+ */
 @Entity
 @Table(name = "clientes")
 public class ClientesModel {
@@ -21,12 +28,14 @@ public class ClientesModel {
     @Column
     private int edad;
 
+    // OJO, se guarda en la BBDD como 1 o 0 (tinyint)
     @Column
-    private boolean sexo;
+    private int sexo;
 
     // Hay que poner en la relación de tablas, OneToMay en el 1 y ManyToOne en el muchos
-    // Aquí ponemos el OneToMany
-    @OneToMany (mappedBy = "nif")
+    // Aquí ponemos el OneToMany. El mapeo hay que ponerle el nombre de la entidad en singular
+	// mappedBy = "cliente" debe coincidir con el nombre del campo en la tabla Reservas
+    @OneToMany (mappedBy = "cliente")
 	private Set<ReservasModel> reservas;
     
     // Setter y Getter
@@ -55,18 +64,18 @@ public class ClientesModel {
 		this.edad = edad;
 	}
 
-	public boolean isSexo() {
+	public int getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(boolean sexo) {
+	public void setSexo(int sexo) {
 		this.sexo = sexo;
 	}
 
 	// Constructores
 	public ClientesModel() {}
 	
-	public ClientesModel(String nif, String nombre, int edad, boolean sexo) {
+	public ClientesModel(String nif, String nombre, int edad, int sexo) {
 		super();
 		this.nif = nif;
 		this.nombre = nombre;
