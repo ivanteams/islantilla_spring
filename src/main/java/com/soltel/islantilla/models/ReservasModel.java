@@ -8,7 +8,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 //import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
-import java.util.Date;
+
+import java.time.LocalDate;
 
 // Tenemos que definir cual será la clave principal en otra clase
 // OJO! Solo para claves compuestas
@@ -21,7 +22,7 @@ public class ReservasModel {
     private int hab;
 
     @Id
-    private Date entrada;
+    private LocalDate entrada;
 
     @ManyToOne
     @JoinColumn(name = "nif", nullable = false)
@@ -30,15 +31,27 @@ public class ReservasModel {
     @Column
     private float precio;
 
+	// [#] Cambio 20240318
+	@Column(name = "ruta_pdf")
+	private String rutaPdf;
+
+	// [#] Cambio 20240318
+	@Column (name = "opciones")
+	private String opciones;
+
     // Constructores
     public ReservasModel() {	}
     
-	public ReservasModel(int hab, Date entrada, ClientesModel cliente, float precio) {
+	// [#] Cambio 20240318
+	public ReservasModel(int hab, LocalDate entrada, ClientesModel cliente, float precio,
+	String rutaPdf, String opciones) {
 		super();
 		this.hab = hab;
 		this.entrada = entrada;
 		this.cliente = cliente;
 		this.precio = precio;
+		this.rutaPdf = rutaPdf;
+		this.opciones = opciones;
 	}
 	
 	// Setter y Getter
@@ -50,15 +63,13 @@ public class ReservasModel {
 		this.hab = hab;
 	}
 
-	public Date getEntrada() {
+	public LocalDate getEntrada() {
 		return entrada;
 	}
 
-	public void setEntrada(Date entrada) {
+	public void setEntrada(LocalDate entrada) {
 		this.entrada = entrada;
 	}
-
-
 
 	public float getPrecio() {
 		return precio;
@@ -67,7 +78,34 @@ public class ReservasModel {
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
+
+	public ClientesModel getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(ClientesModel cliente) {
+		this.cliente = cliente;
+	}
+
+	// Nuevos Setter y Getter
+	// [#] Cambio 20240318
+	public String getRutaPdf() {
+		return rutaPdf;
+	}
+
+	public void setRutaPdf(String rutaPdf) {
+		this.rutaPdf = rutaPdf;
+	}
+
+	public String getOpciones() {
+		return opciones;
+	}
+
+	public void setOpciones(String opciones) {
+		this.opciones = opciones;
+	}
     
+	
 	
     
     

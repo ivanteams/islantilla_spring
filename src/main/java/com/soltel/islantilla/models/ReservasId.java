@@ -1,17 +1,17 @@
 package com.soltel.islantilla.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class ReservasId implements Serializable{
     private int hab;
-    private Date entrada;
+    private LocalDate entrada;
     
     // Constructores
     public ReservasId() {}
     
-	public ReservasId(int hab, Date entrada) {
+	public ReservasId(int hab, LocalDate entrada) {
 		super();
 		this.hab = hab;
 		this.entrada = entrada;
@@ -26,11 +26,11 @@ public class ReservasId implements Serializable{
 		this.hab = hab;
 	}
 
-	public Date getEntrada() {
+	public LocalDate getEntrada() {
 		return entrada;
 	}
 
-	public void setEntrada(Date entrada) {
+	public void setEntrada(LocalDate entrada) {
 		this.entrada = entrada;
 	}
 
