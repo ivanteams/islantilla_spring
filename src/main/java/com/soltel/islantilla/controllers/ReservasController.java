@@ -3,6 +3,7 @@ package com.soltel.islantilla.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soltel.islantilla.models.ClientesModel;
+import com.soltel.islantilla.models.JoinReservasClientes;
 import com.soltel.islantilla.models.ReservasModel;
 import com.soltel.islantilla.services.ClientesService;
 import com.soltel.islantilla.services.ReservasService;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -155,4 +158,14 @@ public class ReservasController {
             return ResponseEntity.ok("Reserva eliminada!");
         } 
     }
+
+    // Método para hacer un JOIN con ambas tablas
+    // Endpoint de ejemplo: [GET] http://localhost:8100/reservas/consultar/join
+    @GetMapping("/consultar/join")
+    public ResponseEntity<List<JoinReservasClientes>> consultarReservasClientes() {
+        List<JoinReservasClientes> listaReservas = reservasService.dameReservasClientes();
+        return ResponseEntity.ok(listaReservas);
+    }
+    
+
 }

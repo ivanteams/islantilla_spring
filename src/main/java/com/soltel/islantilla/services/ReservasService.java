@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.soltel.islantilla.models.JoinReservasClientes;
 import com.soltel.islantilla.models.ReservasId;
 import com.soltel.islantilla.models.ReservasModel;
 import com.soltel.islantilla.repositories.IReservasRepository;
@@ -42,6 +43,11 @@ public class ReservasService {
     public void deleteReserva (int hab, LocalDate entrada) {
         ReservasId id = new ReservasId(hab, entrada);
         reservasRepository.deleteById(id);
+    }
+
+    // Creo un nuevo método para el JOIN
+    public List<JoinReservasClientes> dameReservasClientes() {
+        return reservasRepository.verReservasClientes();
     }
 
 }
