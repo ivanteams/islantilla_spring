@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.soltel.islantilla.models.JoinReservasClientes;
@@ -36,4 +37,13 @@ public interface IReservasRepository extends JpaRepository <ReservasModel, Reser
 		     "FROM ReservasModel r JOIN r.cliente c")
 		 
 		    List<JoinReservasClientes> verReservasClientes();
+
+    @Query( "SELECT new com.soltel.islantilla.models.JoinReservasClientes(" +
+    "r.hab, r.entrada, c.nif, c.nombre, c.edad, " +
+    "r.precio, r.rutaPdf, r.opciones) " +              // Agregado espacio aquí después de )
+    "FROM ReservasModel r JOIN r.cliente c " +
+    " ")
+        
+           List<JoinReservasClientes> 
+                verReservasClientes(@Param("hab") int hab);
 }

@@ -166,6 +166,14 @@ public class ReservasController {
         List<JoinReservasClientes> listaReservas = reservasService.dameReservasClientes();
         return ResponseEntity.ok(listaReservas);
     }
+
+    // Método para hacer un JOIN con ambas tablas filtrado por un parámetro
+    // Endpoint de ejemplo: [GET] http://localhost:8100/reservas/consultar/join/118
+    @GetMapping("/consultar/join/{hab}")
+    public ResponseEntity<List<JoinReservasClientes>> consultarReservasClientes(@PathVariable int hab) {
+        List<JoinReservasClientes> listaReservas = reservasService.dameReservasClientes(hab);
+        return ResponseEntity.ok(listaReservas);
+    }
     
 
 }

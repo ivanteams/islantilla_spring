@@ -50,4 +50,10 @@ public class ReservasService {
         return reservasRepository.verReservasClientes();
     }
 
+
+    // Creo un nuevo método para el JOIN filtrado por habitación
+    public List<JoinReservasClientes> dameReservasClientes(int hab) {
+        return reservasRepository.verReservasClientes(hab);
+    }
+
 }
