@@ -16,8 +16,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +47,7 @@ public class ReservasController {
     }
 
     // Método para consultar
+    // Equivale SELECT * FROM reservas
     // Endpoint de ejemplo: [GET] http://localhost:8100/reservas/consultar
     @GetMapping("/consultar")
     public ResponseEntity<List<ReservasModel>> getAllReservas() {
@@ -106,8 +108,8 @@ public class ReservasController {
     // Método para actualizar
     // NOTA: Ejecutar antes [POST] http://localhost:8100/clientes/insertar/23456789G/Sara/40/1
     // Endpoint de ejemplo: [PUT] 
-    // http://localhost:8100/reservas/insertar/118/2024-04-06/23456789G/100.55/reserva_20240319_001.pdf/spa,masajes
-    @PutMapping("/insertar/{hab}/{entrada}/{nif}/{precio}/{rutaPdf}/{opciones}")
+    // http://localhost:8100/reservas/actualizar/118/2024-04-06/23456789G/90.55/reserva_20240319_001.pdf/spa,masajes,balinesa
+    @PutMapping("/actualizar/{hab}/{entrada}/{nif}/{precio}/{rutaPdf}/{opciones}")
     public ResponseEntity<?> updateReserva (@PathVariable int hab, @PathVariable LocalDate entrada,
         @PathVariable String nif, @PathVariable float precio, 
         @PathVariable String rutaPdf, @PathVariable String opciones) {
@@ -137,16 +139,20 @@ public class ReservasController {
         } 
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    // Método para borrar
+    // Endpoint de ejemplo: [DELETE] http://localhost:8100/reservas/eliminar/120/2024-03-28
+    @DeleteMapping("/eliminar/{hab}/{entrada}")
+    public ResponseEntity<?> deleteReserva (@PathVariable int hab, @PathVariable LocalDate entrada) {
+
+        // 1º Busco si la reserva YA existe
+        Optional<ReservasModel> reserva = reservasService.findReservaById(hab, entrada);
+
+        if(!reserva.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Reserva NO existe!");
+        } else {
+            // Ejecuto el borrado si la reserva existe
+            reservasService.deleteReserva(hab, entrada);
+            return ResponseEntity.ok("Reserva eliminada!");
+        } 
+    }
 }
