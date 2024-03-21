@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 public class IslantillaApplication {
 
-	@RequestMapping(value = "/")
+	@RequestMapping(value = "/inicio")
     public String index() {
         return "<h1>Bienvenidos a Islantilla!</h1>";
     }
