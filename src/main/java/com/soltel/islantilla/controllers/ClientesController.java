@@ -35,6 +35,11 @@ public class ClientesController {
 
     // Método de consulta general
     // endpoint de ejemplo: http://localhost:8100/clientes/consultar
+    /**
+     * @description Endpoint para consultar
+     * @todo Añadir control por Token
+     * @return Entidad por consulta
+     */
     @GetMapping("/consultar")
     public ResponseEntity<List<ClientesModel>> getAllClientes(){
         return ResponseEntity.ok(clientesService.findAllClientes());

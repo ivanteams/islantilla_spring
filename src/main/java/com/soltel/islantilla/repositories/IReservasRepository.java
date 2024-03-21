@@ -42,7 +42,7 @@ public interface IReservasRepository extends JpaRepository <ReservasModel, Reser
     "r.hab, r.entrada, c.nif, c.nombre, c.edad, " +
     "r.precio, r.rutaPdf, r.opciones) " +              // Agregado espacio aquí después de )
     "FROM ReservasModel r JOIN r.cliente c " +
-    " ")
+    " WHERE r.hab = :hab")
         
            List<JoinReservasClientes> 
                 verReservasClientes(@Param("hab") int hab);
