@@ -1,0 +1,27 @@
+<!-- // Spring + Angular: Paso5 -> Vista componente -->
+<!--Mapeamos ngModel ->Modelo de Clientes -->
+<p>formularios-clientes works!</p>
+
+<form (ngSubmit)="onAddCliente(form)" #form="ngForm" class="container mt-4">
+    <section class="mb-3">
+        <label for="nif" class="form-label">NIF</label>
+        <input type="text" class="form-control"  id="nif" ngModel name="nif" required><br>
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control"  id="nombre" ngModel name="nombre" required><br>
+        <label for="edad" class="form-label">Edad</label>
+        <input type="number" class="form-control"  id="edad" ngModel name="edad" required><br>
+        <hr><br>
+        <label class="form-label">Sexo</label>
+        <nav class="form-check">
+            <input type="radio" class="form-check-input" id="sexoMujer" name="sexo" value="1" ngModel required>
+            <label class="form-check-label" for="sexoMujer">Mujer</label>
+        </nav>
+        <nav class="form-check">
+            <input type="radio" class="form-check-input" id="sexoHombre" name="sexo" value="0" ngModel required>
+            <label class="form-check-label" for="sexoHombre">Hombre</label>
+        </nav>
+        <!-- Botón de envío... -->
+        <br><br>
+        <button type="submit" class="btn btn-primary">Crear Cliente</button>
+    </section>
+</form>

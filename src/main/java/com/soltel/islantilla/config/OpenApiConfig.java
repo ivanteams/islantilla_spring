@@ -14,9 +14,9 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
             .info(new Info()
-                .title("Mi API")
+                .title("Endpoints Islantilla")
                 .description("Documentación de la API")
-                .version("v1"))
+                .version("v2.0"))
             .components(new Components()
                 .addSecuritySchemes("basicAuth", 
                     new SecurityScheme()
