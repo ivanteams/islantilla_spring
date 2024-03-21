@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
@@ -19,14 +20,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filtro(HttpSecurity http) throws Exception {
         http
+            .cors(cors -> cors.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()))
             .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/inicio")
-                .hasRole("ADMIN")
+                .requestMatchers("/clientes/**").permitAll() // Permitir todas las solicitudes a /clientes
                 .anyRequest().authenticated())
             .formLogin(form -> form
                 .defaultSuccessUrl("/inicio", true));
-        
+                
         return http.build();
     }
 
