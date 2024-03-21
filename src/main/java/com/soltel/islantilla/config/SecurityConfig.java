@@ -23,7 +23,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()))
             .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/clientes/**").permitAll() // Permitir todas las solicitudes a /clientes
+            		.requestMatchers("/clientes/**", "/reservas/**").permitAll() 	// Permitir solicitudes a /clientes y /reservas
                 .anyRequest().authenticated())
             .formLogin(form -> form
                 .defaultSuccessUrl("/inicio", true));
