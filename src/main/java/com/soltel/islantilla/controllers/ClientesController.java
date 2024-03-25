@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.soltel.islantilla.models.ClientesModel;
 import com.soltel.islantilla.services.ClientesService;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
