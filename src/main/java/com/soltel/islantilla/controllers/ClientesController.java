@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.soltel.islantilla.models.ClientesModel;
 import com.soltel.islantilla.services.ClientesService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
 
 @RestController
 @RequestMapping("/clientes")
+@Tag(name = "Endpoints Clientes")
 public class ClientesController {
 
     // Atributo principal
