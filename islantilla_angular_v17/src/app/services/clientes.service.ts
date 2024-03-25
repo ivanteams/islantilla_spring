@@ -19,14 +19,10 @@ export class ClientesService {
 
   // Agregar clientes
   // @PostMapping("/insertar/{nif}/{nombre}/{edad}/{sexo}")
+  // Observable<Clientes> -> 1 solo cliente
   insertarCliente(cliente: Clientes): Observable<Clientes> {
-    let nuevoCliente: Clientes = {
-      nif: '',
-      nombre: '',
-      edad: 0,
-      sexo: 0
-    }
 
+    // Ojo al endpoint: -> ${objeto.atributo}
     const url = 
       `${this.baseURL}/insertar/${cliente.nif}/${cliente.nombre}/${cliente.edad}/${cliente.sexo}`;
     return this.http.post<Clientes>(url, {});
@@ -34,6 +30,7 @@ export class ClientesService {
 
   // Ver clientes
   // @GetMapping("/consultar/{nif}")
+  // Observable<Clientes[]> -> Array de clientes
   consultarclientes(): Observable<Clientes[]> {
     return this.http.get<Clientes[]>(`${this.baseURL}/consultar`)
   }

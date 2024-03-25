@@ -26,6 +26,7 @@ export class FormulariosClientesComponent implements OnInit{
     })
   }
 
+  // Al arrancar la aplicación se cargan los clientes en el array
   ngOnInit(): void {
       this.cargarClientes();
   }
