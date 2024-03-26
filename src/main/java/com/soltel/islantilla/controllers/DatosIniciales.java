@@ -25,10 +25,11 @@ public class DatosIniciales implements CommandLineRunner {
         clientesRepository.save(cliente);
 
         // Crear y guardar reservas con los nuevos campos
-        ReservasModel reserva1 = new ReservasModel(120, LocalDate.parse("2024-03-28"), cliente, 75.50f, "ruta/pdf1.pdf", "opciones1");
+        
+        ReservasModel reserva1 = new ReservasModel(120, LocalDate.parse("2024-03-30"), cliente, 75.50f, "ruta/pdf1.pdf", "spa");
         reservasRepository.save(reserva1);
 
-        ReservasModel reserva2 = new ReservasModel(118, LocalDate.parse("2024-03-23"), cliente, 110.65f, "ruta/pdf2.pdf", "opciones2");
+        ReservasModel reserva2 = new ReservasModel(118, LocalDate.parse("2024-03-30"), cliente, 110.65f, "ruta/pdf2.pdf", "spa, masajes, balinesa");
         reservasRepository.save(reserva2);
     }
     
