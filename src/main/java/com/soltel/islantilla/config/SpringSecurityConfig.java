@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
@@ -20,21 +22,21 @@ public class SpringSecurityConfig {
     // vamos a levantar la mano para el acceso
     // Evitamos problemas con swagger y el front (Angular)
     @Bean
-    public SecurityFilterChain filtradoSeguridad (HttpSecurity http) throws Exception {
+    public SecurityFilterChain filtradoSeguridad(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(request -> new CorsConfiguration()
-                .applyPermitDefaultValues()))
+                .cors(cors -> cors.configurationSource(request -> new CorsConfiguration()
+                        .applyPermitDefaultValues()))
 
-            // CSRF controla las llamadas del Front
-            .csrf(csrf -> csrf.disable())
+                // CSRF controla las llamadas del Front
+                .csrf(csrf -> csrf.disable())
 
-            // Definimos los prefijos de los endpoints autorizados
-            .authorizeHttpRequests(auth -> auth.
-                requestMatchers("/clientes/**", "/reservas/**").permitAll()
-                .anyRequest().authenticated())
+                // Definimos los prefijos de los endpoints autorizados
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/clientes/**", "/reservas/**").permitAll()
+                        .anyRequest().authenticated())
 
-            // Tras logarse con el formulario, saltar a un endpoint
-            .formLogin(form -> form.defaultSuccessUrl("/menu",true));
+                // Tras logarse con el formulario, saltar a un endpoint
+                .formLogin(form -> form.defaultSuccessUrl("/inicio", true));
         return http.build();
     }
 
@@ -46,13 +48,14 @@ public class SpringSecurityConfig {
 
     // Para definir credenciales de acceso
     @Bean
-    public UserDetailsService credenciales (PasswordEncoder encriptado) {
+    public UserDetailsService credenciales(PasswordEncoder encriptado) {
         UserDetails usuarioPrincipal = User.builder()
-            .username("soltel")
-            .password(encriptado.encode("admin"))
-            .roles("ADMIN")
-            .build();
-            
+                .username("soltel")
+                .password(encriptado.encode("admin"))
+                .roles("ADMIN")
+                .build();
+
         return new InMemoryUserDetailsManager(usuarioPrincipal);
     }
+
 }

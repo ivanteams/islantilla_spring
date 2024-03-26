@@ -21,7 +21,7 @@ public class CorsConfig implements WebMvcConfigurer {
             .allowedMethods("GET", "POST", "PUT")
             .allowedHeaders("*")
             .allowCredentials(true);
-
+    	
         // Otra opción sería derivar los endpoints de /api
     }
 }

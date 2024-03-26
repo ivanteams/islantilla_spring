@@ -1,5 +1,5 @@
-DROP DATABASE IF EXISTS islantilla_spring;
-CREATE DATABASE IF NOT EXISTS islantilla_spring;
+-- DROP DATABASE IF EXISTS islantilla_spring;
+-- CREATE DATABASE IF NOT EXISTS islantilla_spring;
 
 USE islantilla_spring;
 CREATE TABLE clientes
